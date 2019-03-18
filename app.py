@@ -97,7 +97,7 @@ def samples(sample):
     return jsonify(data)
 
 @app.route("/wfreq/<sample>")
-def wfreq(sample):
+def wfreq(sample): 
     sel = [
         Samples_Metadata.sample,
         Samples_Metadata.ETHNICITY,
@@ -107,21 +107,20 @@ def wfreq(sample):
         Samples_Metadata.BBTYPE,
         Samples_Metadata.WFREQ,
     ]
-
     results = db.session.query(*sel).filter(Samples_Metadata.sample == sample).all()
 
-    # Create a dictionary entry for each row of metadata information
-    sample_metadata = {}
+    wfdata = {}
     for result in results:
-        sample_metadata["sample"] = result[0]
-        sample_metadata["ETHNICITY"] = result[1]
-        sample_metadata["GENDER"] = result[2]
-        sample_metadata["AGE"] = result[3]
-        sample_metadata["LOCATION"] = result[4]
-        sample_metadata["BBTYPE"] = result[5]
-        sample_metadata["WFREQ"] = result[6]
+        wfdata["sample"] = result[0]
+        wfdata["ETHNICITY"] = result[1]
+        wfdata["GENDER"] = result[2]
+        wfdata["AGE"] = result[3]
+        wfdata["LOCATION"] = result[4]
+        wfdata["BBTYPE"] = result[5]
+        wfdata["WFREQ"] = result[6]
 
-    print(sample_metadata)
-    return jsonify(sample_metadata)
+
+    print(wfdata)
+    return jsonify(wfdata)
 if __name__ == "__main__":
     app.run()
